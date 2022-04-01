@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <th:block th:text="${post.title + ' - Detail'}"></th:block>
+    </title>
+
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="/css/index.css">
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${post.title}"></h1>
+        <hr>
+        <div>
+            <p th:text="${post.detail}"></p>
+        </div>
+    </div>
+
+</body>
+</html>

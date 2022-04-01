@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="/css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Posts</h1>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Detail</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p, iStat : ${postPage.content}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.title}"></td>
+                    <td th:text="${p.detail}"></td>
+                    <td>
+                        <a th:href="@{/posts/{id}(id = ${p.id})}">Detail Page</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div th:if="${postPage.totalPages > 0 && !postPage.content.empty}">
+            <th:block th:if="${postPage.number > 0}">
+                <a th:href="@{/posts(page = ${postPage.number})}" th:text="prev"></a>
+            </th:block>
+            <th:block th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/posts(page = ${pageNumber})}" th:text="${pageNumber}"
+                    th:class="${pageNumber == postPage.number + 1} ? active"></a>
+            </th:block>
+            <th:block th:if="${postPage.number < postPage.totalPages - 1}">
+                <a th:href="@{/posts(page = ${postPage.number + 2})}" th:text="next"></a>
+            </th:block>
+        </div>
+    </div>
+</body>
+
+</html>
